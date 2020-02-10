@@ -46,10 +46,14 @@ public class Game implements Runnable {
 	public void run() {
 
 		init();
+		
+		FpsTimer timer = new FpsTimer(120);
 
 		while(running) {
-			tick();
-			render();
+			if(timer.check()) {
+				tick();
+				render();
+			}
 		}
 		
 		stop();
