@@ -1,11 +1,14 @@
 package main;
 
+import states.*;
+import input.MouseManager;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import game.Table;
 import game.gfx.ImageLoader;
+
 
 public class Game implements Runnable {
 
@@ -18,9 +21,14 @@ public class Game implements Runnable {
 	private Graphics g;
 	
 	private BufferedImage testImage;
+	private State gameState;
+
+	private Handler handler;
+	
+	private MouseManager mouseManager;
 	
 	public Game() {
-		
+		mouseManager = new MouseManager();
 	}
 
 	private void init() {
@@ -28,11 +36,27 @@ public class Game implements Runnable {
 		display = new Display();
 		display.canvas.createBufferStrategy(3);
 		testImage = ImageLoader.loadImage("/texture/rink.png");
+		display.getFrame().addMouseListener(mouseManager);
+		display.getFrame().addMouseMotionListener(mouseManager);
+		display.getCanvas().addMouseListener(mouseManager);
+		display.getCanvas().addMouseMotionListener(mouseManager);
+		//declared as state but initialized as a GameState
+		handler = new Handler(this);
+		
+		gameState = new GameState(handler);
+		
+		State.setState(gameState);
+		
+		
 		
 	}
 	
 	private void tick() {
 		
+		mouseManager.tick();
+		if(State.getState() != null){
+			State.getState().tick();
+		}
 	}
 	
 	private void render() {
@@ -68,6 +92,10 @@ public class Game implements Runnable {
 		
 		stop();
 		
+	}
+
+	public MouseManager getMouseManager(){
+		return mouseManager;
 	}
 	
 	public synchronized void start() {

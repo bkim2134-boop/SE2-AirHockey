@@ -1,5 +1,6 @@
 package main;
 import game.Table;
+import input.MouseManager;
 
 public class Handler{
     //is now a part of state class
@@ -11,6 +12,9 @@ public class Handler{
     private Table table;
     public Handler(Game game){
         this.game = game;
+    }
+    public MouseManager getMouseManager(){
+        return game.getMouseManager();
     }
     public Game getGame(){
         return game;
