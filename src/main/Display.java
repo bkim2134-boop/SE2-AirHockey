@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 
@@ -15,6 +16,7 @@ public class Display {
 	private JFrame frame;
 	public Canvas canvas;
 	public Dimension screenDimensions;
+	
 	
 	public Display() {
 		

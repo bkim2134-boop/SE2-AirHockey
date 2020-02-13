@@ -3,6 +3,8 @@ package main;
 import states.*;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.event.*;
+
 
 public class Game implements Runnable {
 
@@ -17,11 +19,23 @@ public class Game implements Runnable {
 	private State gameState;
 
 	private Handler handler;
+	
+	private Menu menu;
+	
+	public static enum STATE{
+		MENU,
+		GAME
+	};
+	
+	public static STATE state = STATE.MENU;
+	
 	public Game() {
 		
 	}
 
 	private void init() {
+		
+		this.
 		
 		display = new Display();
 		display.canvas.createBufferStrategy(3);
@@ -29,33 +43,48 @@ public class Game implements Runnable {
 		gameState = new GameState();
 		State.setState(gameState);
 		handler = new Handler(this);
+		menu = new Menu();
+//		this.addMouseListener(new MouseInput());
 		
 	}
-	
+
 	private void tick() {
 		if(State.getState() != null){
 			State.getState().tick();
 		}
+		
 	}
 	
 	private void render() {
-		bs = display.canvas.getBufferStrategy();
-		g = bs.getDrawGraphics();
-		// Clear Screen
-		g.clearRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
-		// Draw Here!
 		
-		
-		
-		//if state == null there will be an error thrwon 
-		if(State.getState() != null){
-			State.getState().render(g);
+		if(state == STATE.GAME) {
+			bs = display.canvas.getBufferStrategy();
+			g = bs.getDrawGraphics();
+			// Clear Screen
+			g.clearRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
+			// Draw Here!
+			
+			
+			//if state == null there will be an error thrwon 
+			if(State.getState() != null){
+				State.getState().render(g);
+			}
+			//commented out as it interfered with running tests on States
+			//g.fillRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
+			// End Drawing!
+			bs.show();
+			g.dispose();
 		}
-		//commented out as it interfered with running tests on States
-		//g.fillRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
-		// End Drawing!
-		bs.show();
-		g.dispose();
+		else if(state == STATE.MENU) {
+			
+			bs = display.canvas.getBufferStrategy();
+			g = bs.getDrawGraphics();
+			menu.renderMenu1(g);
+			bs.show();
+			g.dispose();
+	
+		}
+		
 	}
 	
 
