@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputListener;
 
+//maybe make mouse an entity?????
 public class MouseManager implements MouseInputListener {
   
     private boolean leftPressed;

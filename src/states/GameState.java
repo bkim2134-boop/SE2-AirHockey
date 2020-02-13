@@ -9,9 +9,11 @@ public class GameState extends State{
     private Paddle paddleLeft, paddleRight;
     private Puck puck;
     int initialLeftWidth;
+   
     public GameState(Handler handler){
         super(handler);
         //this logic helps locate relative to screen size during the GameState render separately from the display class
+        //have to change from get screensize to thomas' png for the display
         screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
         initialLeftWidth = screenDimensions.width/5;
         paddleLeft = new Paddle(handler,initialLeftWidth,screenDimensions.height/2);
@@ -21,6 +23,8 @@ public class GameState extends State{
     public void tick(){
         paddleLeft.tick();
         paddleRight.tick();
+        //test code to see if mouse position is being tracked
+        System.out.println(handler.getMouseManager().getMouseX() + "  " + handler.getMouseManager().getMouseY());
     }
     public void render(Graphics g){
         //paddle rendering
