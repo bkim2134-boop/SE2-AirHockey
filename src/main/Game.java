@@ -1,8 +1,11 @@
 package main;
 
-import states.*;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+
+import game.Table;
+import game.gfx.ImageLoader;
 
 public class Game implements Runnable {
 
@@ -14,9 +17,8 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	
-	private State gameState;
-
-	private Handler handler;
+	private BufferedImage testImage;
+	
 	public Game() {
 		
 	}
@@ -25,17 +27,12 @@ public class Game implements Runnable {
 		
 		display = new Display();
 		display.canvas.createBufferStrategy(3);
-		//declared as state but initialized as a GameState
-		gameState = new GameState();
-		State.setState(gameState);
-		handler = new Handler(this);
+		testImage = ImageLoader.loadImage("/texture/rink.png");
 		
 	}
 	
 	private void tick() {
-		if(State.getState() != null){
-			State.getState().tick();
-		}
+		
 	}
 	
 	private void render() {
@@ -45,20 +42,16 @@ public class Game implements Runnable {
 		g.clearRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
 		// Draw Here!
 		
+		g.fillRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
+		
+		g.drawImage(testImage, 0, 0, null);
 		
 		
-		//if state == null there will be an error thrwon 
-		if(State.getState() != null){
-			State.getState().render(g);
-		}
-		//commented out as it interfered with running tests on States
-		//g.fillRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
 		// End Drawing!
 		bs.show();
 		g.dispose();
 	}
 	
-
 	@Override
 	public void run() {
 
