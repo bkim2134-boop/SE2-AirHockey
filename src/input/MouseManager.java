@@ -1,7 +1,5 @@
 package input;
 
-import game.Paddle;
-
 import java.awt.event.MouseEvent;
 
 import javax.swing.event.MouseInputListener;
@@ -23,8 +21,6 @@ public class MouseManager implements MouseInputListener {
     public boolean isLeftPressed(){
         return leftPressed;
     }
-
-    
 
     public int getMouseX(){
         return mouseX;

@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import main.Handler;
 import main.Entity;
@@ -23,14 +24,15 @@ public class Puck extends Entity {
     @Override
     public void render(Graphics g) {
         //determines size of puck will have to change from hardcode to screen proportions
+    	g.setColor(new Color(0, 0, 0));
         g.fillOval((int)x, (int)y, 25,25);
         // TODO Auto-generated method stub
 
     }
 
     public void move(){
-        x -= 1;
-        
-    }
-   
+		x -= 0.01;
+
+	}
+
 }

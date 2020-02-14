@@ -23,11 +23,9 @@ public class Display {
 
 	public Display() {
 		
-		//screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
+		screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		testImage = ImageLoader.loadImage("/texture/rink.png");
-		
-		screenDimensions = new Dimension(testImage.getWidth(),testImage.getHeight());
 		
 		frame = new JFrame("Air Hockey");
 		frame.setSize(screenDimensions.width, screenDimensions.height);
@@ -38,6 +36,11 @@ public class Display {
 		frame.setVisible(true);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
+		canvas = new Canvas();
+		canvas.setPreferredSize(screenDimensions);
+		//canvas.setMaximumSize(screenDimensions);
+		//canvas.setMinimumSize(screenDimensions);
+		
 		// Close on Escape
 		frame.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent key) {
@@ -45,11 +48,12 @@ public class Display {
 					System.exit(0);
 			}
 		});
-		
-		canvas = new Canvas();
-		canvas.setPreferredSize(screenDimensions);
-		//canvas.setMaximumSize(screenDimensions);
-		//canvas.setMinimumSize(screenDimensions);
+		canvas.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent key) {
+				if(key.getKeyCode() == KeyEvent.VK_ESCAPE) 
+					System.exit(0);
+			}
+		});
 		
 		
 		frame.add(canvas);

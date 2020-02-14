@@ -42,8 +42,6 @@ public class Game implements Runnable {
 
 	private void init() {
 		
-		this.
-		
 		display = new Display();
 		display.canvas.createBufferStrategy(3);
 		testImage = ImageLoader.loadImage("/texture/rink.png");
@@ -51,10 +49,8 @@ public class Game implements Runnable {
 		display.getFrame().addMouseMotionListener(mouseManager);
 		display.getCanvas().addMouseListener(mouseManager);
 		display.getCanvas().addMouseMotionListener(mouseManager);
-		//declared as state but initialized as a GameState
 		handler = new Handler(this);
-		menu = new Menu();
-//		this.addMouseListener(new MouseInput());
+		menu = new Menu(display.screenDimensions);
 		
 		gameState = new GameState(handler);
 		
@@ -80,42 +76,20 @@ public class Game implements Runnable {
 		g.clearRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
 		// Draw Here!
 		
-		g.fillRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
-		
-		g.drawImage(testImage, 0, 0, null);
-		
+		if(state == STATE.GAME) {
+			
+			g.drawImage(testImage, 0, 0, null);
+			
+		}
+		else if(state == STATE.MENU) {
+			
+			menu.renderMainMenu(g);
+			
+		}
 		
 		// End Drawing!
 		bs.show();
 		g.dispose();
-		
-		if(state == STATE.GAME) {
-			bs = display.canvas.getBufferStrategy();
-			g = bs.getDrawGraphics();
-			// Clear Screen
-			g.clearRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
-			// Draw Here!
-			
-			
-			//if state == null there will be an error thrwon 
-			if(State.getState() != null){
-				State.getState().render(g);
-			}
-			//commented out as it interfered with running tests on States
-			//g.fillRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
-			// End Drawing!
-			bs.show();
-			g.dispose();
-		}
-		else if(state == STATE.MENU) {
-			
-			bs = display.canvas.getBufferStrategy();
-			g = bs.getDrawGraphics();
-			menu.renderMenu1(g);
-			bs.show();
-			g.dispose();
-	
-		}
 		
 	}
 	

@@ -1,39 +1,46 @@
 package main;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 
 public class Menu {
 	
-	public Dimension screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
-	int WIDTH = screenDimensions.width;
+	private Dimension screenDimensions;
+	private int WIDTH;
 	
-	public Rectangle playButton = new Rectangle((WIDTH/2)-45, 600, 200, 100);
-	public Rectangle exitButton = new Rectangle((WIDTH/2)-45, 800, 200, 100);
+	public Rectangle playButton;
+	public Rectangle exitButton;
 	
-	public void renderMenu1(Graphics g) {
-	
+	public Menu(Dimension screenDimensions) {
+		this.screenDimensions = screenDimensions;
+		this.WIDTH = screenDimensions.width;
 		
-		Graphics2D g2d = (Graphics2D) g;
+		playButton = new Rectangle(50, 300, 200, 100);
+		exitButton = new Rectangle(50, 500, 200, 100);
+	}
+	
+	public void renderMainMenu(Graphics g) {
+		
+		g.setColor(Color.darkGray);
+		g.drawRect(0, 0, screenDimensions.width, screenDimensions.height);
 		
 		Font font1 = new Font("arial", Font.BOLD, 100);
 		g.setFont(font1);
-		g.setColor(Color.black);
-		g.drawString("AIR HOCKEY", (WIDTH/2)-230, 400);
+		g.setColor(Color.gray);
+		g.drawString("AIR HOCKEY", 50, 140);
 		
 		Font font2 = new Font("arial", Font.BOLD, 70);
 		g.setFont(font2);
-		g.drawString("PLAY", playButton.x + 5, playButton.y + 70);
-		g.drawString("EXIT", exitButton.x + 20, exitButton.y + 70);
-		g2d.draw(playButton);
-		g2d.draw(exitButton);
-	
+		g.drawString("PLAY", playButton.x + (playButton.width-g.getFontMetrics().stringWidth("PLAY"))/2, playButton.y + 75);
+		g.drawString("EXIT", exitButton.x + (exitButton.width-g.getFontMetrics().stringWidth("EXIT"))/2, exitButton.y + 75);
+		g.drawRoundRect(playButton.x, playButton.y, playButton.width, playButton.height, 20, 20);
+		g.drawRoundRect(exitButton.x, exitButton.y, exitButton.width, exitButton.height, 20, 20);
 		
 	}
 	
