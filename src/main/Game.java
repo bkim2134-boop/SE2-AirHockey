@@ -34,7 +34,7 @@ public class Game implements Runnable {
 		GAME
 	};
 	
-	public static STATE state = STATE.MENU;
+	public static STATE state = STATE.GAME;
 	
 	public Game() {
 		mouseManager = new MouseManager();
@@ -55,8 +55,6 @@ public class Game implements Runnable {
 		gameState = new GameState(handler);
 		
 		State.setState(gameState);
-		
-		
 		
 	}
 
@@ -79,6 +77,7 @@ public class Game implements Runnable {
 		if(state == STATE.GAME) {
 			
 			g.drawImage(testImage, 0, 0, null);
+			State.getState().render(g);
 			
 		}
 		else if(state == STATE.MENU) {
