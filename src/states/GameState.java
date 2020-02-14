@@ -23,8 +23,8 @@ public class GameState extends State{
     public void tick(){
         paddleLeft.tick();
         paddleRight.tick();
-        //test code to see if mouse position is being tracked
-        System.out.println(handler.getMouseManager().getMouseX() + "  " + handler.getMouseManager().getMouseY());
+        puck.tick();
+        
     }
     public void render(Graphics g){
         //paddle rendering
@@ -32,7 +32,7 @@ public class GameState extends State{
         paddleRight.render(g);
         //puck rendering
         puck.render(g);
-        g.setColor(Color.RED);
+       
 
     }
 }
