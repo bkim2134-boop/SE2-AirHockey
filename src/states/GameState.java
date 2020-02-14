@@ -23,6 +23,7 @@ public class GameState extends State{
     public void tick(){
         paddleLeft.tick();
         paddleRight.tick();
+        puck.tick();
         //test code to see if mouse position is being tracked
         System.out.println(handler.getMouseManager().getMouseX() + "  " + handler.getMouseManager().getMouseY());
     }

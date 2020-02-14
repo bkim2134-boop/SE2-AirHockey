@@ -36,6 +36,7 @@ public class Paddle extends Entity {
         
         //g.fillOval((int)x,(int) y, 55,55);
         //this code is here to show mouse functionality with animation
+        g.setColor(Color.black);
         g.fillOval(handler.getMouseManager().getMouseX(),handler.getMouseManager().getMouseY(),55,55);
 		
 	}
