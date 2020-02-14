@@ -31,7 +31,7 @@ public class Puck extends Entity {
     }
 
     public void move(){
-		x -= 0.01;
+		x -= 1;
 
 	}
 
