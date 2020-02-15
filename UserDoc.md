@@ -34,7 +34,7 @@ This is an option form the menu that gives information to the user. This informa
 
 Teammate contributions so far
 1. Thomas Sievers: Creating the ring and background
-2. Jonathan Turner: User Doc
+2. Jonathan Turner: User Doc, Menu
 3. Elias Moreno: Main Menu and differentiating between game state and menu state.
 4. Benjamin Kim: mouseListener, paddle, and puck movement
 5. Jeremiah Howden: Main Game Engine, Window, FpsTimer, and Graphics
