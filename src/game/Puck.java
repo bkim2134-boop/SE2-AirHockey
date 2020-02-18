@@ -10,8 +10,10 @@ import main.Entity;
 public class Puck extends Entity {
     //since the puck is technically drawn from a rectangle, the collision will work from four sides, top, right, bottom, left
     private int left,right,top,bottom;
+
     public Puck(Handler handler, float x, float y) {
         super(handler, x, y);
+  
         // TODO Auto-generated constructor stub
     }
 
