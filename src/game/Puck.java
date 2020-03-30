@@ -22,7 +22,7 @@ public class Puck extends Entity {
         this.dx = -3.5;
         this.dy = 0;
         screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
-        System.out.println(screenDimensions.width/2 + " " + screenDimensions.height/2);
+        
         //puck hitbox
         this.hitBox = new Rectangle((int)x,(int)y,width,height);
         // TODO Auto-generated constructor stub
@@ -70,6 +70,11 @@ public class Puck extends Entity {
 		
 		
 	}
+    
+    public void reset() {
+    	this.x = this.initialX;
+    	this.y = this.initialY;
+    }
 
 	@Override
 	public Rectangle getHitBox() {
