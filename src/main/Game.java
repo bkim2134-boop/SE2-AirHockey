@@ -45,10 +45,12 @@ public class Game implements Runnable {
 		display = new Display();
 		display.canvas.createBufferStrategy(3);
 		testImage = ImageLoader.loadImage("/texture/rink.png");
+		
 		display.getFrame().addMouseListener(mouseManager);
 		display.getFrame().addMouseMotionListener(mouseManager);
 		display.getCanvas().addMouseListener(mouseManager);
 		display.getCanvas().addMouseMotionListener(mouseManager);
+		
 		handler = new Handler(this);
 		menu = new Menu(display.screenDimensions);
 		

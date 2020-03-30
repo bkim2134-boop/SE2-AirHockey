@@ -7,7 +7,8 @@ import javax.swing.event.MouseInputListener;
 //maybe make mouse an entity?????
 public class MouseManager implements MouseInputListener {
   
-    private boolean leftPressed;
+  
+    private boolean leftClicked, rightClicked;
     private int mouseX, mouseY;
 
     public boolean up;
@@ -18,8 +19,14 @@ public class MouseManager implements MouseInputListener {
     public void tick(){
      
     }
-    public boolean isLeftPressed(){
-        return leftPressed;
+  
+    
+    public boolean isLeftClicked() {
+    	return leftClicked;
+    }
+    
+    public boolean isRightClicked() {
+    	return rightClicked;
     }
 
     public int getMouseX(){
@@ -34,27 +41,32 @@ public class MouseManager implements MouseInputListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+    	if(e.getButton() == MouseEvent.BUTTON1) {
+    		leftClicked = true;
+    	}
+    	else if(e.getButton() == MouseEvent.BUTTON3) {
+    		leftClicked = false;
+    		rightClicked = true;
+    	}
         // TODO Auto-generated method stub
 
     }
+    
+ 
 
     @Override
     public void mousePressed(MouseEvent e) {
         //only listening to left button
-        if(e.getButton()==MouseEvent.BUTTON1){
-            leftPressed = true;
-        }
-        
+       
         // TODO Auto-generated method stub
 
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(e.getButton()==MouseEvent.BUTTON1){
-            leftPressed = false;
-        }
+//        if(e.getButton()==MouseEvent.BUTTON1){
+//            leftPressed = false;
+//        }
         // TODO Auto-generated method stub
 
     }

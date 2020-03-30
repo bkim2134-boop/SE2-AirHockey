@@ -1,38 +1,80 @@
 package game;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import main.Handler;
-import main.Entity;
 
+
+import java.awt.*;
+
+import main.Entity;
+import main.Handler;
 //needs logic for when it collides with a side's goal
 //we will make the collision just the wall
 public class Puck extends Entity {
     //since the puck is technically drawn from a rectangle, the collision will work from four sides, top, right, bottom, left
-    private int left,right,top,bottom;
-    public Puck(Handler handler, float x, float y) {
+    
+    int width,height;
+    Dimension screenDimensions;
+    private double dx, dy;
+    private boolean collided;
+    public Puck(Handler handler, float x, float y, int width, int height) {
         super(handler, x, y);
+        this.width = width;
+        this.height = height;
+        this.dx = -3.5;
+        this.dy = 0;
+        screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
+        System.out.println(screenDimensions.width/2 + " " + screenDimensions.height/2);
+        //puck hitbox
+        this.hitBox = new Rectangle((int)x,(int)y,width,height);
         // TODO Auto-generated constructor stub
     }
 
     @Override
     public void tick() {
+    	
+    	
         // TODO Auto-generated method stub
-        move();
+    	move();
     }
 
     @Override
     public void render(Graphics g) {
         //determines size of puck will have to change from hardcode to screen proportions
     	g.setColor(new Color(0, 0, 0));
-        g.fillOval((int)x, (int)y, 25,25);
+        g.fillOval((int)x, (int)y, width,height);
+       
         // TODO Auto-generated method stub
 
     }
-
+    
+   public void collision(Rectangle otherEntity) {
+	   //in GameState you can see that I have passed the hitbox of the other entity
+	   //does not differentiate between top and bottom collision.
+	 
+	  if(this.hitBox.intersects(otherEntity)) {
+		  this.dx = dx * -1;
+	  } 
+   }
+    
+ 
+ 
+   
     public void move(){
-		x -= 1;
+    	
+    	//since they are variables they can be changed, should really be 0 on initialization and just added and flipped when collided
+    	this.x += dx;
+    	this.y += dy;
+    	this.hitBox.setRect(this.x, this.y, width, height);
+    	
+    	
+    	
+		
+		
+	}
 
+	@Override
+	public Rectangle getHitBox() {
+		// TODO Auto-generated method stub
+		return this.hitBox;
 	}
 
 }
