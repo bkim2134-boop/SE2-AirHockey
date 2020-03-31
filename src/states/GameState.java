@@ -27,16 +27,20 @@ public class GameState extends State{
     public void collision() {
     	//maybe I should check for collision up here.
     	if(puck.getHitBox().intersects(goalLeft.getHitBox())) {
+    		goalLeft.updateScore();
+    		
     		puck.reset();
-    		//this is where we could update the internal score keeping instead of printing
-    		System.out.println("Goal left");
+    	
     	}
     	else if(puck.getHitBox().intersects(goalRight.getHitBox())){
+    		goalRight.updateScore();
+    		
     		puck.reset();
-    		System.out.println("Goal right");
+    	
     	}
     	else if(puck.getHitBox().intersects(paddleLeft.getHitBox())) {
     		puck.collision(paddleLeft.getHitBox());
+    		
     	}
     }
     
