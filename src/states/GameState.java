@@ -64,6 +64,7 @@ public class GameState extends State{
         puck.tick();
         
         
+        
     }
     public void render(Graphics g){
         //paddle rendering

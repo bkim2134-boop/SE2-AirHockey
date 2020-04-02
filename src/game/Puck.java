@@ -57,6 +57,7 @@ public class Puck extends Entity {
 	 
 	  if(this.hitBox.intersects(otherEntity)) {
 		  this.dx = dx * -1;
+		  this.dy = dy * -1;
 	  } 
    }
     

@@ -44,10 +44,11 @@ public class Paddle extends Entity {
             
         }
         else if(handler.getGame().getMouseManager().isRightClicked()&&this.isLeft == true){
-        	this.x = screenDimensions.width;
-        	this.y = screenDimensions.height;
+        	this.x = this.initialX;
+        	this.y = this.initialY;
+        	this.hitBox.setRect(this.x, this.y, 25,25);
         }
-        // TODO Auto-generated method stub
+        // TODO Auto-generated method stub 
 
     }
 
