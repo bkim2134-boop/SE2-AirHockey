@@ -3,7 +3,9 @@ package game;
 
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
+import game.gfx.ImageLoader;
 import main.Entity;
 import main.Handler;
 //needs logic for when it collides with a side's goal
@@ -13,6 +15,7 @@ public class Puck extends Entity {
     
     int width,height;
     Dimension screenDimensions;
+    BufferedImage testImage;
     private double dx, dy;
     private boolean collided;
     public Puck(Handler handler, float x, float y, int width, int height) {
@@ -21,7 +24,9 @@ public class Puck extends Entity {
         this.height = height;
         this.dx = -3.5;
         this.dy = 0;
-        screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
+        //screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
+        testImage = ImageLoader.loadImage("/texture/rink.png");
+		screenDimensions = new Dimension(testImage.getWidth(), testImage.getHeight());
         
         //puck hitbox
         this.hitBox = new Rectangle((int)x,(int)y,width,height);
@@ -40,7 +45,7 @@ public class Puck extends Entity {
     public void render(Graphics g) {
         //determines size of puck will have to change from hardcode to screen proportions
     	g.setColor(new Color(0, 0, 0));
-        g.fillOval((int)x, (int)y, width,height);
+        g.fillOval((int)x-12, (int)y-12, width,height);
        
         // TODO Auto-generated method stub
 

@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+
+import game.gfx.ImageLoader;
 
 
 public class Menu {
@@ -17,8 +20,11 @@ public class Menu {
 	public Rectangle playButton;
 	public Rectangle exitButton;
 	
+	private BufferedImage testImage;
+	
 	public Menu(Dimension screenDimensions) {
-		this.screenDimensions = screenDimensions;
+		testImage = ImageLoader.loadImage("/texture/rink.png");
+		screenDimensions = new Dimension(testImage.getWidth(), testImage.getHeight());
 		this.WIDTH = screenDimensions.width;
 		
 		playButton = new Rectangle(50, 300, 200, 100);

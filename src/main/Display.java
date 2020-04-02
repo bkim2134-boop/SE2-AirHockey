@@ -23,9 +23,11 @@ public class Display {
 
 	public Display() {
 		
-		screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
+		//screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
+		
 		
 		testImage = ImageLoader.loadImage("/texture/rink.png");
+		screenDimensions = new Dimension(testImage.getWidth(), testImage.getHeight());
 		
 		frame = new JFrame("Air Hockey");
 		frame.setSize(screenDimensions.width, screenDimensions.height);

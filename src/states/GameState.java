@@ -2,10 +2,14 @@ package states;
 
 import main.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+
 import game.*;
+import game.gfx.ImageLoader;
 
 public class GameState extends State{
     private Dimension screenDimensions;
+    private BufferedImage testImage;
     private Paddle paddleLeft, paddleRight;
     private Puck puck;
     private Goal goalLeft, goalRight;
@@ -14,14 +18,17 @@ public class GameState extends State{
     public GameState(Handler handler){
         super(handler);
         
-        screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
+        testImage = ImageLoader.loadImage("/texture/rink.png");
+		screenDimensions = new Dimension(testImage.getWidth(), testImage.getHeight());
+        
+        //screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
         initialLeftWidth = screenDimensions.width/5;
         
-        paddleLeft = new Paddle(handler,initialLeftWidth,screenDimensions.height/2,100, 100,true,false);
-        paddleRight = new Paddle(handler,initialLeftWidth * 4, screenDimensions.height/2,100,100,false,true);
-        puck = new Puck(handler,screenDimensions.width/2, screenDimensions.height/2,50,50);
-        goalLeft = new Goal(handler, 0, screenDimensions.height/2 - 125, 50,300,true);
-        goalRight = new Goal(handler, screenDimensions.width-50, screenDimensions.height/2 - 125, 50 ,300,true);
+        paddleLeft = new Paddle(handler,initialLeftWidth,screenDimensions.height/2,50, 50,true,false);
+        paddleRight = new Paddle(handler,initialLeftWidth * 4, screenDimensions.height/2,50,50,false,true);
+        puck = new Puck(handler,screenDimensions.width/2, screenDimensions.height/2,25,25);
+        goalLeft = new Goal(handler, 43, 212, 53,116,true);
+        goalRight = new Goal(handler, 862, 212, 53,116,true);
     }
     
     public void collision() {
@@ -40,6 +47,10 @@ public class GameState extends State{
     	}
     	else if(puck.getHitBox().intersects(paddleLeft.getHitBox())) {
     		puck.collision(paddleLeft.getHitBox());
+    		
+    	}
+    	else if(puck.getHitBox().intersects(paddleRight.getHitBox())) {
+    		puck.collision(paddleRight.getHitBox());
     		
     	}
     }

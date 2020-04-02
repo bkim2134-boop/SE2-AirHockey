@@ -2,6 +2,8 @@ package main;
 
 import states.*;
 import input.MouseManager;
+
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -45,6 +47,7 @@ public class Game implements Runnable {
 		display = new Display();
 		display.canvas.createBufferStrategy(3);
 		testImage = ImageLoader.loadImage("/texture/rink.png");
+		
 		
 		display.getFrame().addMouseListener(mouseManager);
 		display.getFrame().addMouseMotionListener(mouseManager);
