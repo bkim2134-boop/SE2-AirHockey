@@ -22,8 +22,8 @@ public class Puck extends Entity {
         super(handler, x, y);
         this.width = width;
         this.height = height;
-        this.dx = -3.5;
-        this.dy = 0;
+        this.dx = -3;
+        this.dy = 1;
         //screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
         testImage = ImageLoader.loadImage("/texture/rink.png");
 		screenDimensions = new Dimension(testImage.getWidth(), testImage.getHeight());
@@ -57,10 +57,18 @@ public class Puck extends Entity {
 	 
 	  if(this.hitBox.intersects(otherEntity)) {
 		  this.dx = dx * -1;
+		  this.dy = dy * 1;
+	  } 
+   }
+   public void collision2(Rectangle otherEntity) {
+	   //in GameState you can see that I have passed the hitbox of the other entity
+	   //does not differentiate between top and bottom collision.
+	 
+	  if(this.hitBox.intersects(otherEntity)) {
+		  this.dx = dx * 1;
 		  this.dy = dy * -1;
 	  } 
    }
-    
  
  
    

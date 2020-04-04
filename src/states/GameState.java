@@ -13,6 +13,10 @@ public class GameState extends State{
     private Paddle paddleLeft, paddleRight;
     private Puck puck;
     private Goal goalLeft, goalRight;
+    private Table table;
+    private Table2 table2;
+    private Table3 table3;
+    private Table4 table4;
     int initialLeftWidth;
    
     public GameState(Handler handler){
@@ -29,6 +33,10 @@ public class GameState extends State{
         puck = new Puck(handler,screenDimensions.width/2, screenDimensions.height/2,25,25);
         goalLeft = new Goal(handler, 43, 212, 53,116,true);
         goalRight = new Goal(handler, 862, 212, 53,116,true);
+        table = new Table(handler, initialLeftWidth, initialLeftWidth);
+        table2 = new Table2(handler, initialLeftWidth, initialLeftWidth);
+        table3 = new Table3(handler, initialLeftWidth, initialLeftWidth);
+        table4 = new Table4(handler, initialLeftWidth, initialLeftWidth);
     }
     
     public void collision() {
@@ -53,6 +61,19 @@ public class GameState extends State{
     		puck.collision(paddleRight.getHitBox());
     		
     	}
+    	else if(puck.getHitBox().intersects(table.getHitBox())) {
+    		puck.collision(table.getHitBox());
+    	}
+    	else if(puck.getHitBox().intersects(table2.getHitBox())) {
+    		puck.collision2(table2.getHitBox());
+    	}
+    	else if(puck.getHitBox().intersects(table3.getHitBox())) {
+    		puck.collision(table3.getHitBox());
+    	}
+    	else if(puck.getHitBox().intersects(table4.getHitBox())) {
+    		puck.collision2(table4.getHitBox());
+    	}
+    	
     }
     
     public void tick(){
