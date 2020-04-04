@@ -18,7 +18,7 @@ public class Table extends Entity{
 		super(handler, x, y);
 		
 		testImage = ImageLoader.loadImage("/texture/rink.png");
-		this.hitBox = new Rectangle(0,0,2,2000);
+		this.hitBox = new Rectangle(0,0,2,testImage.getHeight());
 		//this.hitBox = new Rectangle(0,0,testImage.getWidth(),1);
 		//this.hitBox = new Rectangle(testImage.getWidth(),0,1,testImage.getHeight());
 		//this.hitBox = new Rectangle(0,0,2000,1);
