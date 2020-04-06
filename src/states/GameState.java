@@ -30,7 +30,7 @@ public class GameState extends State{
         
         paddleLeft = new Paddle(handler,initialLeftWidth,screenDimensions.height/2,50, 50,true,false);
         paddleRight = new Paddle(handler,initialLeftWidth * 4, screenDimensions.height/2,50,50,false,true);
-        puck = new Puck(handler,screenDimensions.width/2, screenDimensions.height/2,25,25);
+        puck = new Puck(handler,screenDimensions.width/2, screenDimensions.height/2,24,24);
         goalLeft = new Goal(handler, 43, 212, 53,116,true);
         goalRight = new Goal(handler, 862, 212, 53,116,true);
         table = new Table(handler, initialLeftWidth, initialLeftWidth);
@@ -43,23 +43,11 @@ public class GameState extends State{
     	//maybe I should check for collision up here.
     	if(puck.getHitBox().intersects(goalLeft.getHitBox())) {
     		goalLeft.updateScore();
-    		
     		puck.reset();
-    	
     	}
     	else if(puck.getHitBox().intersects(goalRight.getHitBox())){
     		goalRight.updateScore();
-    		
     		puck.reset();
-    	
-    	}
-    	else if(puck.getHitBox().intersects(paddleLeft.getHitBox())) {
-    		puck.collision(paddleLeft.getHitBox());
-    		
-    	}
-    	else if(puck.getHitBox().intersects(paddleRight.getHitBox())) {
-    		puck.collision(paddleRight.getHitBox());
-    		
     	}
     	else if(puck.getHitBox().intersects(table.getHitBox())) {
     		puck.collision(table.getHitBox());
@@ -73,6 +61,8 @@ public class GameState extends State{
     	else if(puck.getHitBox().intersects(table4.getHitBox())) {
     		puck.collision2(table4.getHitBox());
     	}
+    	puck.collisionPaddle(paddleLeft);
+    	puck.collisionPaddle(paddleRight);
     	
     }
     
