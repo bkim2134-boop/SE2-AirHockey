@@ -21,7 +21,7 @@ class goalRightTest {
 	void setUp() throws Exception {
 		
 		System.out.println("Inside the setup..");
-		goalRight = new Goal(handler, 43, 212, 53,116,true);
+		goalRight = new Goal(handler, 862, 212, 53,116,true);
 		
 		puck1 = new Puck(handler,891, 252,25,25);
 		puck2 = new Puck(handler,865, 309,25,25);
@@ -32,27 +32,27 @@ class goalRightTest {
 	}
 
 	@Test
-	void goalLeftID1() {
+	void goalRightID1() {
 		System.out.println("Puck is at postion: (891,252)");
 		assertEquals(puck1.getHitBox().intersects(goalRight.getHitBox()), true);
 	}
 	@Test
-	void goalLeftID2() {
+	void goalRightID2() {
 		System.out.println("Puck is at postion: (865,309)");
 		assertEquals(puck2.getHitBox().intersects(goalRight.getHitBox()), true);
 	}
 	@Test
-	void goalLeftID3() {
+	void goalRightID3() {
 		System.out.println("Puck is at postion: (899,315)");
 		assertEquals(puck3.getHitBox().intersects(goalRight.getHitBox()), true);
 	}
 	@Test
-	void goalLeftID4() {
+	void goalRightID4() {
 		System.out.println("Puck is at postion: (100,407)");
 		assertEquals(puck4.getHitBox().intersects(goalRight.getHitBox()), false);
 	}
 	@Test
-	void goalLeftID5() {
+	void goalRightID5() {
 		System.out.println("Puck is at postion: (700,555)");
 		assertEquals(puck5.getHitBox().intersects(goalRight.getHitBox()), false);
 	}
