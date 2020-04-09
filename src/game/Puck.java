@@ -22,8 +22,8 @@ public class Puck extends Entity {
         super(handler, x, y);
         this.width = width;
         this.height = height;
-        this.dx = -3;
-        this.dy = 1;
+        this.dx = 0;
+        this.dy = 0;
         //screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
         testImage = ImageLoader.loadImage("/texture/rink.png");
 		screenDimensions = new Dimension(testImage.getWidth(), testImage.getHeight());
@@ -87,7 +87,8 @@ public class Puck extends Entity {
 		   
 	   }
    }
- 
+   
+
  
    
     public void move(){

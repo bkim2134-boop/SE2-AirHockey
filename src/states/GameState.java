@@ -40,7 +40,7 @@ public class GameState extends State{
     }
     
     public void collision() {
-    	//maybe I should check for collision up here.
+    	
     	if(puck.getHitBox().intersects(goalLeft.getHitBox())) {
     		goalLeft.updateScore();
     		puck.reset();
@@ -65,6 +65,8 @@ public class GameState extends State{
     	puck.collisionPaddle(paddleRight);
     	
     }
+    
+   
     
     public void tick(){
     	collision();
