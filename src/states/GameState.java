@@ -10,6 +10,8 @@ import game.gfx.ImageLoader;
 public class GameState extends State{
     private Dimension screenDimensions;
     private BufferedImage testImage;
+    private Player currentPlayer;
+    private boolean switchState;
     private Paddle paddleLeft, paddleRight;
     private Puck puck;
     private Goal goalLeft, goalRight;
@@ -21,6 +23,7 @@ public class GameState extends State{
    
     public GameState(Handler handler){
         super(handler);
+        this.switchState = false;
         
         testImage = ImageLoader.loadImage("/texture/rink.png");
 		screenDimensions = new Dimension(testImage.getWidth(), testImage.getHeight());
@@ -28,6 +31,10 @@ public class GameState extends State{
         //screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
         initialLeftWidth = screenDimensions.width/5;
         
+        //always create a new player object, will simply just change the constructor input source depending on the 
+        //prior existence of the player eg. from text or from menu state that had stored user input
+        
+        currentPlayer = new Player("TestName");
         paddleLeft = new Paddle(handler,initialLeftWidth,screenDimensions.height/2,50, 50,true,false);
         paddleRight = new Paddle(handler,initialLeftWidth * 4, screenDimensions.height/2,50,50,false,true);
         puck = new Puck(handler,screenDimensions.width/2, screenDimensions.height/2,24,24);
@@ -66,7 +73,15 @@ public class GameState extends State{
     	
     }
     
-   
+    public void switchStateUpdate() {
+    	if(goalRight.getScore() >= 1) {
+    		this.switchState = true;
+    	}
+    }
+    
+    public boolean getSwitchState() {
+    	return this.switchState;
+    }
     
     public void tick(){
     	collision();
@@ -75,7 +90,7 @@ public class GameState extends State{
         //could just add collision logic in the tick method for gamestate so that it has access to all three entities
         //eventually goal will also be added to the game state.
         puck.tick();
-        
+        switchStateUpdate();
         
         
     }
