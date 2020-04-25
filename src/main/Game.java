@@ -25,6 +25,7 @@ public class Game implements Runnable {
 	
 	private BufferedImage testImage;
 	private State gameState;
+	private State menuState;
 
 	private Handler handler;
 	
@@ -36,7 +37,7 @@ public class Game implements Runnable {
 		GAME
 	};
 	
-	public static STATE state = STATE.GAME;
+	public static STATE state = STATE.MENU;
 	
 	public Game() {
 		mouseManager = new MouseManager();
@@ -58,6 +59,7 @@ public class Game implements Runnable {
 		menu = new Menu(display.screenDimensions);
 		
 		gameState = new GameState(handler);
+		menuState = new MenuState(handler);
 		
 		State.setState(gameState);
 		
@@ -68,7 +70,15 @@ public class Game implements Runnable {
 		mouseManager.tick();
 		if(State.getState() != null){
 			State.getState().tick();
+			if(State.getState().getSwitchState() && State.getState() == menuState) {
+				State.setState(gameState);
+			}
+			else if(State.getState().getSwitchState() && State.getState() == gameState) {
+				State.setState(menuState);
+			}		
+			
 		}
+		//require state switching logic
 		
 	}
 	
@@ -79,16 +89,16 @@ public class Game implements Runnable {
 		g.clearRect(0, 0, display.screenDimensions.width, display.screenDimensions.height);
 		// Draw Here!
 		
-		if(state == STATE.GAME) {
+		if(State.getState() == gameState) {
 			
 			g.drawImage(testImage, 0, 0, null);
 			State.getState().render(g);
 			
 		}
-		else if(state == STATE.MENU) {
+		else if(State.getState() == menuState) {
 			
-			menu.renderMainMenu(g);
-			
+			g.drawRect(0, 0, testImage.getWidth(), testImage.getHeight());
+			State.getState().render(g);
 		}
 		
 		// End Drawing!
