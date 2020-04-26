@@ -10,7 +10,8 @@ import main.Handler;
 
 public class Paddle extends Entity {
    private Dimension mousePosition, paddlePosition, screenDimensions;
-   private int width, height;
+   int width;
+   int height;
    private boolean isLeft, isRight;
    private BufferedImage testImage;
    

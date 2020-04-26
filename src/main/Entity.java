@@ -5,7 +5,10 @@ import java.awt.*;
 public abstract class Entity{
     //floats allow for fluid movement, the calculations are not integer
     //starting position of entity
-    protected float x, y, initialX, initialY;
+    public float x;
+	public float y;
+	protected float initialX;
+	protected float initialY;
     protected Handler handler;
     protected Rectangle hitBox;
 
