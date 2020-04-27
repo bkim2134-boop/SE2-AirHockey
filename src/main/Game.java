@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JFrame;
+
 import game.Table;
 import game.gfx.ImageLoader;
 import java.awt.event.*;
@@ -16,6 +18,7 @@ import java.awt.event.*;
 public class Game implements Runnable {
 
 	private boolean running = false;
+	private boolean switchStates = false;
 	
 	private Thread thread;
 	private Display display;
@@ -26,7 +29,8 @@ public class Game implements Runnable {
 	private BufferedImage testImage;
 	private State gameState;
 	private State menuState;
-
+	
+	private boolean switchState;
 	private Handler handler;
 	
 	private MouseManager mouseManager;
@@ -37,7 +41,7 @@ public class Game implements Runnable {
 		GAME
 	};
 	
-	public static STATE state = STATE.MENU;
+	public static STATE state = STATE.GAME;
 	
 	public Game() {
 		mouseManager = new MouseManager();
@@ -60,6 +64,7 @@ public class Game implements Runnable {
 		
 		gameState = new GameState(handler);
 		menuState = new MenuState(handler);
+		switchState = false;
 		
 		State.setState(gameState);
 		
@@ -70,11 +75,13 @@ public class Game implements Runnable {
 		mouseManager.tick();
 		if(State.getState() != null){
 			State.getState().tick();
-			if(State.getState().getSwitchState() && State.getState() == menuState) {
+			//switch to game state
+			if(State.getState() == menuState && menuState.getSwitchState()) {
+				 
 				State.setState(gameState);
 			}
-			else if(State.getState().getSwitchState() && State.getState() == gameState) {
-				State.setState(menuState);
+			else if(State.getState() == gameState && gameState.getSwitchState()) {
+				State.setState(menuState);;
 			}		
 			
 		}
@@ -97,7 +104,6 @@ public class Game implements Runnable {
 		}
 		else if(State.getState() == menuState) {
 			
-			g.drawRect(0, 0, testImage.getWidth(), testImage.getHeight());
 			State.getState().render(g);
 		}
 		
