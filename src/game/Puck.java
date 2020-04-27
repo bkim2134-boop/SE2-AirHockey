@@ -86,7 +86,6 @@ public class Puck extends Entity {
 		   this.dy += (this.y - collisionPointY) / 4;
 		   
 	   }
-
 	   
    }
    public void AIcollisionPaddle(AIPaddle aipaddle) {
@@ -116,7 +115,6 @@ public class Puck extends Entity {
    }
    public float getY() {
 	   return (float) this.y;
-
    }
    
 
