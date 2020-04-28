@@ -6,26 +6,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-import javax.swing.*;
+import javax.swing.JButton;
 
 import game.*;
 import game.gfx.ImageLoader;
-//make need to make menu state a JFrame extension so that it functions better and pass a value to game
+//make need to make menu state a JFrame extension so that it functions better and pass a vlaue to game
 public class MenuState extends State{
 	private boolean switchState;
-	JButton submitName;
-	JTextField nameInput;
+	JButton button;
 	private Dimension screenDimensions;
-    private BufferedImage testImage; 
-    JFrame myFrame;
-    private boolean rendered;
+  private BufferedImage testImage; 
+
+  JFrame myFrame;
+  private boolean rendered;
 	JPanel menuPanel;
 	JTextField playerName;
 	JLabel menuLabel;
 	ActionListener submitListener;
 	private String retrievedPlayerName;
 	private Player playerOne;
-	
+
 	public MenuState (Handler handler) {
 		super(handler);
 		this.switchState = false;
@@ -46,13 +46,13 @@ public class MenuState extends State{
 		menuPanel = new JPanel((new GridLayout(4,4,4,4)));
 		submitName = new JButton("Submit");
 		playerName = new JTextField(30);
-		
-		
-	}
-	
+  
+  
+  }
 	public boolean getSwitchState() {
 		return this.switchState;
 	}
+
 	public void flipSwitchState() {
 		this.switchState = !this.switchState;
 	}
@@ -84,7 +84,7 @@ public class MenuState extends State{
 		//https://stackoverflow.com/questions/15577688/search-a-file-for-a-string-and-return-that-string-if-found
 		return playerOne;
 	}
-	
+
 	//require button actionlistener, on event e we have to run our search. but for now we can implement a the switch back to 
 	//game state
 	@Override
@@ -92,23 +92,15 @@ public class MenuState extends State{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
 
 	@Override
 	public void render(Graphics g) {
-		//require a flag to to only show once. Maybe only call another method if flag
-		if(!rendered) {
+		// TODO Auto-generated method stub
+	if(!rendered) {
 			
 			myFrame.setVisible(true);
 			showMenu();
 			rendered = true;
 		}
-		//need to flip rendered back to false after the game state is changed
-		//will probably have to do it on the action button
-		
-		// TODO Auto-generated method stub
-		
-		
 	}
 }

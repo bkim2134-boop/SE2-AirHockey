@@ -12,7 +12,8 @@ public class GameState extends State{
     private BufferedImage testImage;
     private Player currentPlayer;
     private boolean switchState;
-    private Paddle paddleLeft, paddleRight;
+    private Paddle paddleLeft;
+    private AIPaddle aipaddle;
     private Puck puck;
     private Goal goalLeft, goalRight;
     private Table table;
@@ -33,11 +34,12 @@ public class GameState extends State{
         
         //always create a new player object, will simply just change the constructor input source depending on the 
         //prior existence of the player eg. from text or from menu state that had stored user input
-        
+        puck = new Puck(handler,screenDimensions.width/2, screenDimensions.height/2,24,24);
         currentPlayer = new Player("TestName");
         paddleLeft = new Paddle(handler,initialLeftWidth,screenDimensions.height/2,50, 50,true,false);
-        paddleRight = new Paddle(handler,initialLeftWidth * 4, screenDimensions.height/2,50,50,false,true);
-        puck = new Puck(handler,screenDimensions.width/2, screenDimensions.height/2,24,24);
+        //paddleRight = new Paddle(handler,initialLeftWidth * 4, screenDimensions.height/2,50,50,false,true);
+        aipaddle = new AIPaddle(handler,initialLeftWidth * 4, screenDimensions.height/2,50,50,false,true,puck);
+        
         goalLeft = new Goal(handler, 43, 212, 53,116,true);
         goalRight = new Goal(handler, 862, 212, 53,116,true);
         table = new Table(handler, initialLeftWidth, initialLeftWidth);
@@ -51,10 +53,12 @@ public class GameState extends State{
     	if(puck.getHitBox().intersects(goalLeft.getHitBox())) {
     		goalLeft.updateScore();
     		puck.reset();
+    		aipaddle.reset();
     	}
     	else if(puck.getHitBox().intersects(goalRight.getHitBox())){
     		goalRight.updateScore();
     		puck.reset();
+    		aipaddle.reset();
     	}
     	else if(puck.getHitBox().intersects(table.getHitBox())) {
     		puck.collision(table.getHitBox());
@@ -69,7 +73,9 @@ public class GameState extends State{
     		puck.collision2(table4.getHitBox());
     	}
     	puck.collisionPaddle(paddleLeft);
-    	puck.collisionPaddle(paddleRight);
+    	//puck.collisionPaddle(paddleRight);
+    	puck.AIcollisionPaddle(aipaddle);
+    	
     	
     }
     
@@ -86,10 +92,12 @@ public class GameState extends State{
     public void tick(){
     	collision();
         paddleLeft.tick();
-        paddleRight.tick();
+        //paddleRight.tick();
+        
         //could just add collision logic in the tick method for gamestate so that it has access to all three entities
         //eventually goal will also be added to the game state.
         puck.tick();
+        aipaddle.tick();
         switchStateUpdate();
         
         
@@ -97,7 +105,8 @@ public class GameState extends State{
     public void render(Graphics g){
         //paddle rendering
         paddleLeft.render(g);
-        paddleRight.render(g);
+        //paddleRight.render(g);
+        aipaddle.render(g);
         //puck rendering
         puck.render(g);
         goalLeft.render(g);

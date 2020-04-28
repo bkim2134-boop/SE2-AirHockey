@@ -16,7 +16,7 @@ public class Puck extends Entity {
     int width,height;
     Dimension screenDimensions;
     BufferedImage testImage;
-    private double dx, dy;
+    public double dx, dy;
     private boolean collided;
     public Puck(Handler handler, float x, float y, int width, int height) {
         super(handler, x, y);
@@ -86,6 +86,35 @@ public class Puck extends Entity {
 		   this.dy += (this.y - collisionPointY) / 4;
 		   
 	   }
+	   
+   }
+   public void AIcollisionPaddle(AIPaddle aipaddle) {
+	   // vars
+	   float puckRadius = this.width/2;
+	   float paddleRadius = aipaddle.width/2;
+	   double distance = Math.pow(this.x - aipaddle.x, 2) + Math.pow(this.y - aipaddle.y, 2);
+	   double radii = Math.pow(puckRadius + paddleRadius, 2);
+	   
+	   // check for collision
+	   if(distance <= radii) {
+		   System.out.println("\nColliding!\n");
+		   // collision point
+		   float collisionPointX = ((this.x * paddleRadius) + (aipaddle.x * puckRadius)) / (puckRadius + paddleRadius);
+		   float collisionPointY = ((this.y * paddleRadius) + (aipaddle.y * puckRadius)) / (puckRadius + paddleRadius);
+		   
+		   this.dx += (this.x - collisionPointX) / 4;
+		   this.dy += (this.y - collisionPointY) / 4;
+		   
+	   }
+	   
+   }
+   
+   
+   public float getX() {
+	   return (float) this.x;
+   }
+   public float getY() {
+	   return (float) this.y;
    }
    
 
