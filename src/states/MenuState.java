@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JButton;
+import javax.swing.*;
 
 import game.*;
 import game.gfx.ImageLoader;
@@ -25,7 +25,10 @@ public class MenuState extends State{
 	ActionListener submitListener;
 	private String retrievedPlayerName;
 	private Player playerOne;
-
+	JButton submitName;
+    JTextField nameInput;
+	
+	
 	public MenuState (Handler handler) {
 		super(handler);
 		this.switchState = false;
@@ -66,7 +69,7 @@ public class MenuState extends State{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				//now we pass this retrieved player name to search algorithm
-				retrievedPlayerName = playerName.getText();
+				retrievedPlayerName = playerName.getText();// this is line to do io on player name
 				//create another text field that contains what score to play until
 			}
 			
