@@ -24,6 +24,7 @@ public class MenuState extends State{
 	JLabel menuLabel;
 	ActionListener submitListener;
 	private String retrievedPlayerName;
+	private Player playerOne;
 	
 	public MenuState (Handler handler) {
 		super(handler);
@@ -78,6 +79,12 @@ public class MenuState extends State{
 		menuPanel.add(submitName);
 		myFrame.add(menuPanel, BorderLayout.NORTH);
 	}
+	
+	public Player checkPlayerExists(String retrievedPlayerName) {
+		//https://stackoverflow.com/questions/15577688/search-a-file-for-a-string-and-return-that-string-if-found
+		return playerOne;
+	}
+	
 	//require button actionlistener, on event e we have to run our search. but for now we can implement a the switch back to 
 	//game state
 	@Override
