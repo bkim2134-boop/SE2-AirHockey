@@ -1,5 +1,8 @@
 package states;
 
+
+
+
 import main.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,6 +13,9 @@ import javax.swing.*;
 
 import game.*;
 import game.gfx.ImageLoader;
+
+
+
 //make need to make menu state a JFrame extension so that it functions better and pass a vlaue to game
 public class MenuState extends State{
 	private boolean switchState;
@@ -25,9 +31,13 @@ public class MenuState extends State{
 	ActionListener submitListener;
 	private String retrievedPlayerName;
 	private Player playerOne;
+	private CSVScanner CSVscanner;
+	
 	JButton submitName;
     JTextField nameInput;
-	
+    
+   
+	Boolean InList;
 	
 	public MenuState (Handler handler) {
 		super(handler);
@@ -63,13 +73,35 @@ public class MenuState extends State{
 		return this.myFrame;
 	}
 	public void showMenu() {
+		
+		CSVscanner = new CSVScanner();
 		submitName.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				//now we pass this retrieved player name to search algorithm
-				retrievedPlayerName = playerName.getText();// this is line to do io on player name
+				
+				retrievedPlayerName = playerName.getText();// this is line to do io on player name and win becaus ethat is assumed it goes name wins time in seconds------------------------------
+				
+				
+				
+				
+				InList = CSVscanner.CSVScanner(retrievedPlayerName);
+				
+				if(InList) {
+					System.out.println("work1");
+					//if it is true it should go here which means that it exists in the csv 
+					
+					
+				}
+				else {
+					System.out.println("work2");
+					CSVScanner.CSVNewInput(retrievedPlayerName, 1);
+					// if false need to add a new thing to the csv
+				}
+				
+				
 				//create another text field that contains what score to play until
 			}
 			
