@@ -10,25 +10,29 @@ import java.util.Date;
 
 public class ServiceRunner {
 
-	public static void main(String args[]) throws IOException { 
+    public static void main(String args[]) throws IOException {
 
         String path = "UserInfo.csv";
         BufferedReader br = null;
         String line = "";
         String csvSplitby = ",";
 
+        ServerSocket server = new ServerSocket(8080);
+        System.out.println("Listening for connection on port 8080...");
+
+        br = new BufferedReader(new FileReader(path));
+        String httpResponse = new String();
+
         try {
-
-            br = new BufferedReader(new FileReader(path));
-            while ((line = br.readLine()) != null) {
-
-                // use comma as separator
-                String[] user = line.split(csvSplitby);
-
-                System.out.println(user[0] + " " + user[1] + " " + user[2]);
-
+            while (true) {
+                try (Socket socket = server.accept()) {
+                    while ((line = br.readLine()) != null) {
+                        String[] user = line.split(csvSplitby);
+                        httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + user[0] + " " + user[1] + " " + user[2];
+                        socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
+                    }
+                }
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -45,15 +49,6 @@ public class ServiceRunner {
             }
         }
 
-        ServerSocket server = new ServerSocket(8080); 
-        System.out.println("Listening for connection on port 8080...");
-        while (true) { 
-            try (Socket socket = server.accept()) { 
-                Date today = new Date(); 
-                String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + today; 
-                socket.getOutputStream().write(httpResponse.getBytes("UTF-8")); 
-            } 
-        }
-    } 
-	
+    }
+
 }
