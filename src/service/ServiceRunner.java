@@ -12,7 +12,7 @@ public class ServiceRunner {
 
 	public static void main(String args[]) throws IOException { 
 
-        String path = "../../UserInfo.csv";
+        String path = "UserInfo.csv";
         BufferedReader br = null;
         String line = "";
         String csvSplitby = ",";
