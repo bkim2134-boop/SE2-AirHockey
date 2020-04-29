@@ -1,12 +1,45 @@
-import java.io.BufferedReader; 
-import java.io.IOException; 
-import java.io.InputStreamReader; 
-import java.net.ServerSocket; 
-import java.net.Socket; 
+import java.io.*;
+import java.net.*; 
 import java.util.Date;
 
 public class Server { 
     public static void main(String args[] ) throws IOException { 
+
+        String path = "../UserInfo.csv";
+        BufferedReader br = null;
+        String line = "";
+        String csvSplitby = ",";
+
+        System.out.println("Help me!");
+
+        try {
+
+            br = new BufferedReader(new FileReader(path));
+            while ((line = br.readLine()) != null) {
+
+                // use comma as separator
+                String[] user = line.split(csvSplitby);
+
+                System.out.println(user[0] + " " + user[1] + " " + user[2]);
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Help!");
+            }
+        }
+
         ServerSocket server = new ServerSocket(8080); 
         System.out.println("Listening for connection on port 8080 ...."); 
         while (true) { 
