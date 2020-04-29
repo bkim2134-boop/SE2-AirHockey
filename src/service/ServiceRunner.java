@@ -1,16 +1,21 @@
-import java.io.*;
-import java.net.*; 
+package service;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Date;
 
-public class Server { 
-    public static void main(String args[] ) throws IOException { 
+public class ServiceRunner {
 
-        String path = "../UserInfo.csv";
+	public static void main(String args[]) throws IOException { 
+
+        String path = "../../UserInfo.csv";
         BufferedReader br = null;
         String line = "";
         String csvSplitby = ",";
-
-        System.out.println("Help me!");
 
         try {
 
@@ -41,7 +46,7 @@ public class Server {
         }
 
         ServerSocket server = new ServerSocket(8080); 
-        System.out.println("Listening for connection on port 8080 ...."); 
+        System.out.println("Listening for connection on port 8080...");
         while (true) { 
             try (Socket socket = server.accept()) { 
                 Date today = new Date(); 
@@ -50,4 +55,5 @@ public class Server {
             } 
         }
     } 
+	
 }

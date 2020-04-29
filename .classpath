@@ -9,7 +9,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="src" path="service"/>
-	<classpathentry kind="lib" path="OpenCSV/opencsv-5.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
