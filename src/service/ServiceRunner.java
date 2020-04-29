@@ -22,15 +22,17 @@ public class ServiceRunner {
 
         br = new BufferedReader(new FileReader(path));
         String httpResponse = new String();
+        
+        httpResponse = "HTTP/1.1 200 OK\r\n\r\n";
+        while ((line = br.readLine()) != null) {
+            String[] user = line.split(csvSplitby);
+            httpResponse += user[0] + " " + user[1] + " " + user[2] + "\r\n";
+        }
 
         try {
             while (true) {
                 try (Socket socket = server.accept()) {
-                    while ((line = br.readLine()) != null) {
-                        String[] user = line.split(csvSplitby);
-                        httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + user[0] + " " + user[1] + " " + user[2];
-                        socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
-                    }
+                    socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
                 }
             }
         } catch (FileNotFoundException e) {
