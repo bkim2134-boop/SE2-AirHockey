@@ -59,6 +59,7 @@ public class GameState extends State{
     		goalRight.updateScore();
     		puck.reset();
     		aipaddle.reset();
+    		
     	}
     	else if(puck.getHitBox().intersects(table.getHitBox())) {
     		puck.collision(table.getHitBox());

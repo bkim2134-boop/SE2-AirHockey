@@ -75,6 +75,9 @@ public class Game implements Runnable {
 			}
 			else if(State.getState().getSwitchState() && State.getState() == gameState) {
 				State.setState(menuState);
+				
+				
+				//this is where pass to get a goal
 			}		
 			
 		}
