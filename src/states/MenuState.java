@@ -90,13 +90,11 @@ public class MenuState extends State{
 				InList = CSVscanner.CSVScanner(retrievedPlayerName);
 				
 				if(InList) {
-					System.out.println("work1");
+					
 					//if it is true it should go here which means that it exists in the csv 
-					
-					
+					CSVscanner.CSVedit(retrievedPlayerName, 1);
 				}
 				else {
-					System.out.println("work2");
 					CSVScanner.CSVNewInput(retrievedPlayerName, 1);
 					// if false need to add a new thing to the csv
 				}
