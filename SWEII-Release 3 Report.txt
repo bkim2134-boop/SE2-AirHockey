@@ -1,0 +1,20 @@
+﻿Github Link: https://github.com/JerHowden/SE2-AirHockey
+Report:
+
+
+1. Game.java
+   1. Switch from gameState to menuState. 71-78
+2. CSVScanner.java 
+   1. This is a completely new class ins src > main package. This exists to get input from edit and add new entries to the UserInfo.csv  it is used in the menuseState.java class and also contains most of the file I/O from the program. [entire class]
+3. MenuState.java 
+   1. Menu.java was the original menu. It existed as a placeholder but there was nothing in it other than a skeleton. Now it has been switched to menuState that  handles the basic menu that exists to add and or edit users’ scores. [entire class]
+4. UserInfo.csv
+   1. The csv file that has the user info. Manipulated by CSVScanner.java.
+
+
+5. ServiceRunner.java
+   1. 2 web services that fetch users and number of wins according to the csv file in this project. The service runs on localhost:8080. [entire class]
+
+
+6. AI has also been implemented into the Air Hockey game. 
+   1. It follows the puck around the rink trying to score on the player character. [Appended to puck.java class]
